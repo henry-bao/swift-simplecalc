@@ -1,11 +1,58 @@
 print("Welcome to the UW Calculator Playground")
 
 func calculate(_ args: [String]) -> Int {
-    return -1
+    
+    let stringOperation = args.last
+    
+    switch stringOperation {
+    case "count":
+        return args.count - 1
+    case "avg":
+        if args[0] == "avg" {
+            break
+        }
+        var sum = 0;
+        for arg in args {
+            sum += Int(arg) ?? 0
+        }
+        return sum / (args.count - 1)
+    case "fact":
+        if args[0] == "fact" {
+            break
+        }
+        let initNum = Int(args[0])!
+        var res = 1
+        if initNum > 1 {
+            for num in 1...initNum {
+                res *= num
+            }
+        }
+        return res
+    default:
+        let operation = args[1];
+        switch operation {
+        case "+":
+            return Int(args[0])! + Int(args[2])!
+        case "-":
+            return Int(args[0])! - Int(args[2])!
+        case "*":
+            return Int(args[0])! * Int(args[2])!
+        case "/":
+            return Int(args[0])! / Int(args[2])!
+        case "%":
+            return Int(args[0])! % Int(args[2])!
+        default:
+            return 0
+            
+        }
+    }
+    
+    return 0
 }
 
 func calculate(_ arg: String) -> Int {
-    return -1
+    let argArray = arg.split(separator: " ").map(String.init)
+    return calculate(argArray)
 }
 
 // -------------------------------------------
@@ -53,7 +100,7 @@ calculate("5 fact") == 120
 
 // Implement calculate([String]) and calculate(String)
 // to handle negative numbers
-/*
+
 calculate(["2", "+", "-2"]) == 0
 calculate(["2", "-", "-2"]) == 4
 calculate(["2", "*", "-2"]) == -4
@@ -68,16 +115,61 @@ calculate("2 - -2") == 4
 calculate("-2 / 2") == -1
 
 calculate("1 -2 3 -4 5 count") == 5
-*/
+
  
 // Implement calculate([String]) and calculate(String)
 // to use floating-point values
-/*
+
 func calculate(_ args: [String]) -> Double {
-    return -1.0
+    
+    let stringOperation = args.last
+    
+    switch stringOperation {
+    case "count":
+        return Double(args.count - 1)
+    case "avg":
+        if args[0] == "avg" {
+            break
+        }
+        var sum = 0;
+        for arg in args {
+            sum += Int(arg) ?? 0
+        }
+        return Double(sum / (args.count - 1))
+    case "fact":
+        if args[0] == "fact" {
+            break
+        }
+        let initNum = Int(args[0])!
+        var res = 1
+        if initNum > 1 {
+            for num in 1...initNum {
+                res *= num
+            }
+        }
+        return Double(res)
+    default:
+        let operation = args[1];
+        switch operation {
+        case "+":
+            return Double(args[0])! + Double(args[2])!
+        case "-":
+            return Double(args[0])! - Double(args[2])!
+        case "*":
+            return Double(args[0])! * Double(args[2])!
+        case "/":
+            return Double(args[0])! / Double(args[2])!
+        default:
+            return 0.0
+            
+        }
+    }
+    
+    return 0.0
 }
 func calculate(_ arg: String) -> Double {
-    return -1.0
+    let argArray = arg.split(separator: " ").map(String.init)
+    return calculate(argArray)
 }
 
 calculate(["2.0", "+", "2.0"]) == 4.0
@@ -86,5 +178,5 @@ calculate(["12.0", "-", "12.0"]) == 0.0
 calculate(["2.5", "*", "2.5"]) == 6.25
 calculate(["2.0", "/", "2.0"]) == 1.0
 calculate(["2.0", "%", "2.0"]) == 0.0
-calculate("1.0 2.0 3.0 4.0 5.0 count") == 5
-*/
+calculate("1.0 2.0 3.0 4.0 5.0 count") == 5.0
+
