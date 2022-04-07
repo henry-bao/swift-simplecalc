@@ -127,27 +127,6 @@ func calculate(_ args: [String]) -> Double {
     switch stringOperation {
     case "count":
         return Double(args.count - 1)
-    case "avg":
-        if args[0] == "avg" {
-            break
-        }
-        var sum = 0;
-        for arg in args {
-            sum += Int(arg) ?? 0
-        }
-        return Double(sum / (args.count - 1))
-    case "fact":
-        if args[0] == "fact" {
-            break
-        }
-        let initNum = Int(args[0])!
-        var res = 1
-        if initNum > 1 {
-            for num in 1...initNum {
-                res *= num
-            }
-        }
-        return Double(res)
     default:
         let operation = args[1];
         switch operation {
@@ -159,14 +138,14 @@ func calculate(_ args: [String]) -> Double {
             return Double(args[0])! * Double(args[2])!
         case "/":
             return Double(args[0])! / Double(args[2])!
+        case "%":
+            return Double(args[0])!.truncatingRemainder(dividingBy: Double(args[2])!)
         default:
             return 0.0
-            
         }
     }
-    
-    return 0.0
 }
+
 func calculate(_ arg: String) -> Double {
     let argArray = arg.split(separator: " ").map(String.init)
     return calculate(argArray)
@@ -179,4 +158,3 @@ calculate(["2.5", "*", "2.5"]) == 6.25
 calculate(["2.0", "/", "2.0"]) == 1.0
 calculate(["2.0", "%", "2.0"]) == 0.0
 calculate("1.0 2.0 3.0 4.0 5.0 count") == 5.0
-
